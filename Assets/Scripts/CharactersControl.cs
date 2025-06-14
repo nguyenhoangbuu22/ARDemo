@@ -47,37 +47,44 @@ public class CharactersControl : MonoBehaviour
 
     public void OnTopDown()
     {
+        if (currentCharacter == null) return;
         currentCharacter.MoveCharacter(true);
-        moveDirection = Vector3.forward;
+        moveDirection = GetCameraRelativeDirection(Vector3.forward);
     }
     public void OnBottomDown()
     {
+        if (currentCharacter == null) return;
         currentCharacter.MoveCharacter(true);
-        moveDirection = Vector3.back;
+        moveDirection = GetCameraRelativeDirection(Vector3.back);
     }
     public void OnLeftDown()
     {
+        if (currentCharacter == null) return;
         currentCharacter.MoveCharacter(true);
-        moveDirection = Vector3.left;
+        moveDirection = GetCameraRelativeDirection(Vector3.left);
     }
     public void OnRightDown()
     {
+        if (currentCharacter == null) return;
         currentCharacter.MoveCharacter(true);
-        moveDirection = Vector3.right;
+        moveDirection = GetCameraRelativeDirection(Vector3.right);
     }
     public void OnAttack()
     {
+        if (currentCharacter == null) return;
         currentCharacter.Attack();
     }
 
     public void OnButtonUp()
     {
+        if (currentCharacter == null) return;
         currentCharacter.MoveCharacter(false);
         moveDirection = Vector3.zero;
     }
 
     public void Onjump()
     {
+        if(currentCharacter == null) return;
         if(currentCharacter.IsGrounded())
         {
             jumping = true;
@@ -115,7 +122,20 @@ public class CharactersControl : MonoBehaviour
 
     public void RemoveCurrCharacter()
     {
+        if (currentCharacter == null) return;
         RemoveACharacter(currentCharacter);
+    }
+
+    private Vector3 GetCameraRelativeDirection(Vector3 inputDirection)
+    {
+        Vector3 forward = Camera.main.transform.forward;
+        Vector3 right = Camera.main.transform.right;
+        forward.y = 0;
+        right.y = 0;
+        forward.Normalize();
+        right.Normalize();
+        Vector3 direction = inputDirection.z * forward + inputDirection.x * right;
+        return direction.normalized;
     }
 
 }

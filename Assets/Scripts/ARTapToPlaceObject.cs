@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
@@ -56,6 +56,9 @@ public class ARTapToPlaceObject : MonoBehaviour
     public void CreateCharacter()
     {
         GameObject characterObj = Instantiate(prefab, placementPose.position, placementPose.rotation);
+        var sizeOrigin = characterObj.transform.localScale;
+        characterObj.transform.localScale = Vector3.zero;
+        characterObj.transform.DOScale(sizeOrigin, 0.5f).SetEase(Ease.OutBack);
         Character character = characterObj.GetComponent<Character>();
         GameControl.Ins.characterController.AddACharacter(character);
         GameControl.Ins.characterController.SelectCharacter(character);
