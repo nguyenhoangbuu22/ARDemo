@@ -22,12 +22,14 @@ public class Skill : MonoBehaviour
     public float speedMove = 0.5f;
     [SerializeField] private GameObject bullet;
     [SerializeField] private GameObject effect;
+    [SerializeField] private Collider collider;
 
     private Tween currentTween; // Tween đang chạy
 
     private void Reset()
     {
         if (string.IsNullOrEmpty(IDSkill)) IDSkill = Guid.NewGuid().ToString();
+        collider = GetComponent<Collider>();
     }
 
     void OnTriggerEnter(Collider other)
@@ -39,6 +41,7 @@ public class Skill : MonoBehaviour
             bullet.SetActive(false);
             effect.SetActive(true);
             used = false;
+            collider.enabled = false;
         }
     }
 
@@ -58,8 +61,11 @@ public class Skill : MonoBehaviour
     {
         bullet.SetActive(false);
         effect.SetActive(false);
+        collider.enabled = true;
         Vector3 direction = (posEnd - posStart).normalized;
-        Vector3 randomOffset = Vector3.Cross(direction, UnityEngine.Random.insideUnitSphere).normalized * UnityEngine.Random.Range(0.05f, 0.2f);
+        //Vector3 randomOffset = Vector3.Cross(direction, UnityEngine.Random.insideUnitSphere).normalized * UnityEngine.Random.Range(0.05f, 0.2f);
+        Vector3 offset = new Vector3( UnityEngine.Random.Range(-0.2f, 0.2f),  UnityEngine.Random.Range(-0.05f, 0.2f), UnityEngine.Random.Range(0.01f, 0.15f));
+        Vector3 randomOffset = Quaternion.LookRotation(direction) * offset;
         Vector3 midPoint = (posStart + posEnd) / 2f + randomOffset;
         Vector3[] path = new Vector3[] { posStart, midPoint, posEnd };
 
@@ -74,6 +80,7 @@ public class Skill : MonoBehaviour
                                         effect.SetActive(true);
                                         used = false;
                                         moveComplete?.Invoke();
+                                        collider.enabled = false;
                                     });
         });
     }

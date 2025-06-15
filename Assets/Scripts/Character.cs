@@ -132,7 +132,7 @@ public class Character : MonoBehaviour
                 return clip.length;
         }
         Debug.LogWarning("Không tìm thấy clip: " + clipName);
-        return 0.5f; // fallback time
+        return 0f;
     }
 
     private void Damage()

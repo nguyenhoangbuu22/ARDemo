@@ -53,6 +53,7 @@ MonoBehaviour:
   speedMove: 0.5
   bullet: {fileID: 7589267680139054272}
   effect: {fileID: 6514893430029464426}
+  collider: {fileID: 5256517867071927954}
 --- !u!135 &5256517867071927954
 SphereCollider:
   m_ObjectHideFlags: 0

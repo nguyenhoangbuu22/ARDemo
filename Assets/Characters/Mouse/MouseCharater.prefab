@@ -267,7 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2692e14c096167549a5e90da36c84cfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heal: 10
+  heal: 30
   IconSelect: {fileID: 7116064923071966876}
   Animator: {fileID: 5467187350495538345}
   raycastDistance: 7
@@ -278,7 +278,7 @@ MonoBehaviour:
   tranPosSkill: {fileID: 7464817945914730902}
   skillPrefab: {fileID: 7947097151026291568, guid: 86d8a4d0b5901644ca0eb4da5b21c471, type: 3}
   healthBar: {fileID: 1616591399005728841}
-  distanceAtk: 0.5
+  distanceAtk: 0.8
 --- !u!65 &4266027144241270239
 BoxCollider:
   m_ObjectHideFlags: 0
