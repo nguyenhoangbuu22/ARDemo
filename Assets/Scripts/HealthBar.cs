@@ -1,18 +1,20 @@
 ﻿using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthBar : MonoBehaviour
 {
-    public Transform healthFill;
+    [SerializeField] private Transform healthFill;
     private float maxHealth = 10f;
     private float currentHealth;
     private Vector3 originalScale;
 
+    public Action unbloodyAction;
+
     void Start()
     {
-        currentHealth = maxHealth;
         originalScale = healthFill.localScale;
     }
 
@@ -24,6 +26,12 @@ public class HealthBar : MonoBehaviour
         }
     }
 
+    public void Init(float health)
+    {
+        currentHealth = health;
+        maxHealth = health;
+    }
+
     public void TakeDamage(float damage)
     {
         currentHealth = Mathf.Max(0, currentHealth - damage);
@@ -31,6 +39,9 @@ public class HealthBar : MonoBehaviour
 
         healthFill.DOScaleX(originalScale.x * ratio, 1f);
         float offsetX = (1 - ratio) * originalScale.x * 0.5f;
-        healthFill.DOLocalMoveX(-offsetX, 1f);
+        healthFill.DOLocalMoveX(-offsetX, 1f).OnComplete(()=>
+        {
+            if(currentHealth <= 0) unbloodyAction?.Invoke();
+        });
     }
 }

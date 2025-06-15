@@ -23,9 +23,35 @@ public class Skill : MonoBehaviour
     [SerializeField] private GameObject bullet;
     [SerializeField] private GameObject effect;
 
+    private Tween currentTween; // Tween đang chạy
+
     private void Reset()
     {
         if (string.IsNullOrEmpty(IDSkill)) IDSkill = Guid.NewGuid().ToString();
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("CharacterEnemy") && gameObject.CompareTag("SkillAlly"))
+        {
+            currentTween?.Kill();
+
+            bullet.SetActive(false);
+            effect.SetActive(true);
+            used = false;
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("CharacterEnemy") && gameObject.CompareTag("SkillAlly"))
+        {
+            currentTween?.Kill();
+
+            bullet.SetActive(false);
+            effect.SetActive(true);
+            used = false;
+        }
     }
 
     public void MoveAttack(Vector3 posStart, Vector3 posEnd, Action moveComplete = null)
@@ -36,19 +62,19 @@ public class Skill : MonoBehaviour
         Vector3 randomOffset = Vector3.Cross(direction, UnityEngine.Random.insideUnitSphere).normalized * UnityEngine.Random.Range(0.05f, 0.2f);
         Vector3 midPoint = (posStart + posEnd) / 2f + randomOffset;
         Vector3[] path = new Vector3[] { posStart, midPoint, posEnd };
+
         transform.DOMove(posStart, 0).OnComplete(() =>
         {
             bullet.SetActive(true);
-            transform.DOPath(path, speedMove, PathType.CatmullRom)
-                     .SetEase(Ease.Linear)
-                     .OnComplete(() =>
-                     {
-                         bullet.SetActive(false);
-                         effect.SetActive(true);
-                         used = false;
-                         moveComplete?.Invoke();
-                     });
+            currentTween = transform.DOPath(path, speedMove, PathType.CatmullRom)
+                                    .SetEase(Ease.Linear)
+                                    .OnComplete(() =>
+                                    {
+                                        bullet.SetActive(false);
+                                        effect.SetActive(true);
+                                        used = false;
+                                        moveComplete?.Invoke();
+                                    });
         });
-
     }
 }

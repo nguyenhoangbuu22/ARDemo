@@ -4,22 +4,47 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    [Header("Infor----------")]
+    [SerializeField] float heal = 10f;
+    [Header("Componant--------------")]
     [SerializeField] GameObject IconSelect;
     [SerializeField] Animator Animator;
-
     [SerializeField] float raycastDistance = 3.0f;
     [SerializeField] LayerMask arPlaneLayerMask;
     [SerializeField] SkillType skillType;
     [SerializeField] Transform tranPosSkill;
     [SerializeField] GameObject skillPrefab;
+    [SerializeField] HealthBar healthBar;
     public float distanceAtk = 1f;
 
     bool isGrounded;
     InforSkill inforSkill;
 
-    private void Start()
+    private void Awake()
     {
+        skillPrefab.tag = gameObject.CompareTag("CharacterEnemy") ? "SkillEnemy" : "SkillAlly";
         inforSkill = new InforSkill(skillPrefab.GetComponent<Skill>().IDSkill, skillPrefab);
+        healthBar.Init(heal);
+        healthBar.unbloodyAction = () =>
+        {
+            Animator.SetTrigger("Dead");
+        };
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("SkillAlly") && gameObject.CompareTag("CharacterEnemy"))
+        {
+            Damage();
+        }    
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("SkillAlly") && gameObject.CompareTag("CharacterEnemy"))
+        {
+            Damage();
+        }
     }
 
     void Update()
@@ -45,11 +70,17 @@ public class Character : MonoBehaviour
     public void ShowSelected()
     {
         IconSelect.SetActive(true);
+        healthBar.gameObject.SetActive(false);
+        gameObject.tag = "CharacterAlly";
+        inforSkill.skillPrefab.tag = "SkillAlly";
     }
 
     public void HideSelected()
     {
         IconSelect.SetActive(false);
+        healthBar.gameObject.SetActive(true);
+        gameObject.tag = "CharacterEnemy";
+        inforSkill.skillPrefab.tag = "SkillEnemy";
     }
 
     public void DestroyCharacter()
@@ -103,4 +134,11 @@ public class Character : MonoBehaviour
         Debug.LogWarning("Không tìm thấy clip: " + clipName);
         return 0.5f; // fallback time
     }
+
+    private void Damage()
+    {
+        Animator.SetTrigger("Damage");
+        healthBar.TakeDamage(1);
+
+    }    
 }

@@ -194,6 +194,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MouseCharater
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e93074ef7dbd6a74ea3b982889aa548d, type: 3}
+      propertyPath: m_TagString
+      value: CharacterAlly
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -203,6 +207,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: e93074ef7dbd6a74ea3b982889aa548d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8501680704643067477}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: e93074ef7dbd6a74ea3b982889aa548d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7300240121439893479}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e93074ef7dbd6a74ea3b982889aa548d, type: 3}
       insertIndex: -1
@@ -213,6 +220,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e93074ef7dbd6a74ea3b982889aa548d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4266027144241270239}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e93074ef7dbd6a74ea3b982889aa548d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4749990810074494632}
   m_SourcePrefab: {fileID: 100100000, guid: e93074ef7dbd6a74ea3b982889aa548d, type: 3}
 --- !u!4 &7220909177538511888 stripped
 Transform:
@@ -257,6 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2692e14c096167549a5e90da36c84cfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  heal: 10
   IconSelect: {fileID: 7116064923071966876}
   Animator: {fileID: 5467187350495538345}
   raycastDistance: 7
@@ -266,6 +277,7 @@ MonoBehaviour:
   skillType: 0
   tranPosSkill: {fileID: 7464817945914730902}
   skillPrefab: {fileID: 7947097151026291568, guid: 86d8a4d0b5901644ca0eb4da5b21c471, type: 3}
+  healthBar: {fileID: 1616591399005728841}
   distanceAtk: 0.5
 --- !u!65 &4266027144241270239
 BoxCollider:
@@ -288,3 +300,103 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.7474118, y: 1.1897252, z: 0.691373}
   m_Center: {x: -0.032585636, y: 0.60057926, z: 0.090258755}
+--- !u!54 &4749990810074494632
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8033861048861384362}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!1001 &8151088030431016292
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7220909177538511888}
+    m_Modifications:
+    - target: {fileID: 1464183174056493699, guid: c213f0c072889db4bab62013b77d3c0b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1464183174056493699, guid: c213f0c072889db4bab62013b77d3c0b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.759
+      objectReference: {fileID: 0}
+    - target: {fileID: 1464183174056493699, guid: c213f0c072889db4bab62013b77d3c0b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1464183174056493699, guid: c213f0c072889db4bab62013b77d3c0b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1464183174056493699, guid: c213f0c072889db4bab62013b77d3c0b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1464183174056493699, guid: c213f0c072889db4bab62013b77d3c0b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1464183174056493699, guid: c213f0c072889db4bab62013b77d3c0b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1464183174056493699, guid: c213f0c072889db4bab62013b77d3c0b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1464183174056493699, guid: c213f0c072889db4bab62013b77d3c0b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1464183174056493699, guid: c213f0c072889db4bab62013b77d3c0b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7461055890534937752, guid: c213f0c072889db4bab62013b77d3c0b, type: 3}
+      propertyPath: m_Name
+      value: StatusCharacter
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c213f0c072889db4bab62013b77d3c0b, type: 3}
+--- !u!114 &1616591399005728841 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7453794037573043501, guid: c213f0c072889db4bab62013b77d3c0b, type: 3}
+  m_PrefabInstance: {fileID: 8151088030431016292}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2097d5b3cae695e44a72c30150b0cad7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &7300240121439893479 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1464183174056493699, guid: c213f0c072889db4bab62013b77d3c0b, type: 3}
+  m_PrefabInstance: {fileID: 8151088030431016292}
+  m_PrefabAsset: {fileID: 0}
