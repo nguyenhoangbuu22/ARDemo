@@ -7,12 +7,48 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private Button btnCreateCharacter;
     [SerializeField] private Button btnRemoveCharacter;
+    [SerializeField] private Button btnOptions;
+    [SerializeField] private Button btnEdit;
+    [SerializeField] private Button btnShowControlChar;
+    [SerializeField] private GameObject objPopup;
+    [SerializeField] private GameObject objControl;
+    [SerializeField] private GameObject objEdit;
 
     private void Start()
     {
         btnRemoveCharacter.onClick.AddListener(OnClickRemoveCharacter);
         btnCreateCharacter.onClick.AddListener(OnClickCreaterCharacter);
+        btnOptions.onClick.AddListener(OnClickOptions);
+        btnEdit.onClick.AddListener(OnClickEdit);
+        btnShowControlChar.onClick.AddListener(OnClickControlChar);
         ShowUIWhenSelectCharacter(false);
+        Init();
+    }
+
+    private void Init()
+    {
+        objPopup.SetActive(false);
+        objEdit.SetActive(true);
+        objControl.SetActive(false);
+    }
+
+    private void OnClickEdit()
+    {
+        objPopup.SetActive(false);
+        objEdit.SetActive(true);
+        objControl.SetActive(false);
+    }
+
+    private void OnClickControlChar()
+    {
+        objPopup.SetActive(false);
+        objEdit.SetActive(false);
+        objControl.SetActive(true);
+    }
+
+    private void OnClickOptions()
+    {
+        objPopup.SetActive(!objPopup.activeSelf);
     }
 
     public void ShowUIWhenSelectCharacter(bool isSelect)
@@ -24,10 +60,12 @@ public class UIManager : MonoBehaviour
     public void OnClickRemoveCharacter()
     {
         GameControl.Ins.characterController.RemoveCurrCharacter();
+        ShowUIWhenSelectCharacter(false);
     }
 
     public void OnClickCreaterCharacter()
     {
         GameControl.Ins.ARTapToPlaceObject.CreateCharacter();
     }
+
 }
