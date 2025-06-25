@@ -10,9 +10,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button btnOptions;
     [SerializeField] private Button btnEdit;
     [SerializeField] private Button btnShowControlChar;
+    [SerializeField] private Button btnStartBattle;
     [SerializeField] private GameObject objPopup;
     [SerializeField] private GameObject objControl;
     [SerializeField] private GameObject objEdit;
+    [SerializeField] private PopupResult popupResult;
 
     private void Start()
     {
@@ -21,6 +23,7 @@ public class UIManager : MonoBehaviour
         btnOptions.onClick.AddListener(OnClickOptions);
         btnEdit.onClick.AddListener(OnClickEdit);
         btnShowControlChar.onClick.AddListener(OnClickControlChar);
+        btnStartBattle.onClick.AddListener(OnClickStartBattle);
         ShowUIWhenSelectCharacter(false);
         Init();
     }
@@ -30,6 +33,7 @@ public class UIManager : MonoBehaviour
         objPopup.SetActive(false);
         objEdit.SetActive(true);
         objControl.SetActive(false);
+        popupResult.Hide();
     }
 
     private void OnClickEdit()
@@ -44,6 +48,12 @@ public class UIManager : MonoBehaviour
         objPopup.SetActive(false);
         objEdit.SetActive(false);
         objControl.SetActive(true);
+    }
+
+    private void OnClickStartBattle()
+    {
+        GameControl.Ins.characterController.StartBattle();
+        OnClickControlChar();
     }
 
     private void OnClickOptions()
@@ -68,4 +78,13 @@ public class UIManager : MonoBehaviour
         GameControl.Ins.ARTapToPlaceObject.CreateCharacter();
     }
 
+    public void ResetUI()
+    {
+        Init();
+    }
+
+    public void ShowResult(bool isWin, int point)
+    {
+        popupResult.Show(isWin, point);
+    }
 }

@@ -198,6 +198,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: CharacterAlly
       objectReference: {fileID: 0}
+    - target: {fileID: 4315648579854482848, guid: e93074ef7dbd6a74ea3b982889aa548d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4315648579854482848, guid: e93074ef7dbd6a74ea3b982889aa548d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e7e812889e019b84abb641a57b087521, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -224,6 +232,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4749990810074494632}
   m_SourcePrefab: {fileID: 100100000, guid: e93074ef7dbd6a74ea3b982889aa548d, type: 3}
+--- !u!137 &6366726866531966555 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4315648579854482848, guid: e93074ef7dbd6a74ea3b982889aa548d, type: 3}
+  m_PrefabInstance: {fileID: 7187582135496598523}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7220909177538511888 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e93074ef7dbd6a74ea3b982889aa548d, type: 3}
@@ -268,6 +281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heal: 30
+  moveSpeed: 0.01
   IconSelect: {fileID: 7116064923071966876}
   Animator: {fileID: 5467187350495538345}
   raycastDistance: 7
@@ -277,8 +291,12 @@ MonoBehaviour:
   skillType: 0
   tranPosSkill: {fileID: 7464817945914730902}
   skillPrefab: {fileID: 7947097151026291568, guid: 86d8a4d0b5901644ca0eb4da5b21c471, type: 3}
+  skillPrefab2: {fileID: 7947097151026291568, guid: 1b8cc32ad29436048acd6b488f739883, type: 3}
   healthBar: {fileID: 1616591399005728841}
-  distanceAtk: 0.8
+  materialDefault: {fileID: 2100000, guid: e7e812889e019b84abb641a57b087521, type: 2}
+  materialRed: {fileID: 2100000, guid: 3046371be9c0cfb42b39033f02121d18, type: 2}
+  skinned: {fileID: 6366726866531966555}
+  distanceAtk: 0.5
 --- !u!65 &4266027144241270239
 BoxCollider:
   m_ObjectHideFlags: 0

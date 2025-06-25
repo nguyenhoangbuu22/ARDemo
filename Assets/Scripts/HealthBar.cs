@@ -7,6 +7,10 @@ using UnityEngine;
 public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Transform healthFill;
+    [SerializeField] private MeshRenderer meshRenderer;
+    [SerializeField] private Material greenMaterial;
+    [SerializeField] private Material RedMaterial;
+
     private float maxHealth = 10f;
     private float currentHealth;
     private Vector3 originalScale;
@@ -30,6 +34,11 @@ public class HealthBar : MonoBehaviour
     {
         currentHealth = health;
         maxHealth = health;
+    }
+
+    public void ChangeMaterial(bool isSelect)
+    {
+        meshRenderer.material = isSelect ? greenMaterial : RedMaterial;
     }
 
     public void TakeDamage(float damage)

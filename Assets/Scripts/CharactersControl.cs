@@ -1,7 +1,9 @@
 ﻿using DG.Tweening;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
 public class CharactersControl : MonoBehaviour
@@ -124,6 +126,53 @@ public class CharactersControl : MonoBehaviour
     {
         if (currentCharacter == null) return;
         RemoveACharacter(currentCharacter);
+    }
+
+    public void StartBattle()
+    {
+        Characters.ForEach(c =>
+        {
+            if(c != currentCharacter)
+            {
+                c.AttackTarget(currentCharacter);
+            }    
+        });
+    }
+
+    public bool ValidateEnemyAlive(out int deadCount)
+    {
+        deadCount = 0;
+        foreach (var item in Characters)
+        {
+            if (item != currentCharacter)
+            {
+                if (item.IsDead())
+                    deadCount++;
+                else
+                    return true;
+            }
+        }
+
+        return false;
+    }
+
+    public int TotalEnemyDead()
+    {
+        int count = 0;
+        foreach (var character in Characters)
+        {
+            if (character != currentCharacter && character.IsDead())
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public void RemoveAllCharacters()
+    {
+        Characters.ForEach(c => c.DestroyCharacter());
+        Characters.Clear();
     }
 
     private Vector3 GetCameraRelativeDirection(Vector3 inputDirection)

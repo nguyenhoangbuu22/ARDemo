@@ -12,6 +12,8 @@ public class GameControl : MonoBehaviour
     public UIManager UIManager;
     public SkillManager SkillManager;
 
+    public bool isBattled;
+
     private Camera mainCam;
 
     private void Start()
@@ -77,5 +79,26 @@ public class GameControl : MonoBehaviour
             characterController.SelectCharacter(character);
             UIManager.ShowUIWhenSelectCharacter(true);
         }
+    }
+
+    public void StartBattle()
+    {
+        isBattled = true;
+        characterController.StartBattle();
+    }
+
+    public void CheckEndGame()
+    {
+        if (!characterController.ValidateEnemyAlive(out int deadCount))
+        {
+            isBattled = false;
+            UIManager.ShowResult(true, deadCount);
+        }
+    }
+
+    public void RestartGame()
+    {
+        characterController.RemoveAllCharacters();
+        UIManager.ResetUI();
     }
 }

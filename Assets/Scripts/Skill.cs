@@ -22,7 +22,7 @@ public class Skill : MonoBehaviour
     public float speedMove = 0.5f;
     [SerializeField] private GameObject bullet;
     [SerializeField] private GameObject effect;
-    [SerializeField] private Collider collider;
+    [SerializeField] private new Collider collider;
 
     private Tween currentTween; // Tween đang chạy
 
@@ -32,9 +32,32 @@ public class Skill : MonoBehaviour
         collider = GetComponent<Collider>();
     }
 
-    void OnTriggerEnter(Collider other)
+    //void OnTriggerEnter(Collider other)
+    //{
+    //    //if (other.CompareTag("CharacterEnemy") && gameObject.CompareTag("SkillAlly"))
+    //    //{
+    //    //    currentTween?.Kill();
+
+    //    //    bullet.SetActive(false);
+    //    //    effect.SetActive(true);
+    //    //    used = false;
+    //    //    collider.enabled = false;
+    //    //}
+
+    //}
+
+    void OnCollisionEnter(Collision collision)
     {
-        if (other.CompareTag("CharacterEnemy") && gameObject.CompareTag("SkillAlly"))
+        //if (collision.gameObject.CompareTag("CharacterEnemy") && gameObject.CompareTag("SkillAlly"))
+        //{
+        //    currentTween?.Kill();
+
+        //    bullet.SetActive(false);
+        //    effect.SetActive(true);
+        //    used = false;
+        //}
+
+        if (collision.gameObject.CompareTag("SkillEnemy") || gameObject.CompareTag("SkillAlly"))
         {
             currentTween?.Kill();
 
@@ -42,18 +65,6 @@ public class Skill : MonoBehaviour
             effect.SetActive(true);
             used = false;
             collider.enabled = false;
-        }
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("CharacterEnemy") && gameObject.CompareTag("SkillAlly"))
-        {
-            currentTween?.Kill();
-
-            bullet.SetActive(false);
-            effect.SetActive(true);
-            used = false;
         }
     }
 
